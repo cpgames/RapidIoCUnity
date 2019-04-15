@@ -7,11 +7,15 @@
         #endregion
 
         #region Properties
-        public TModel Model
+        public virtual TModel Model
         {
             get => _model;
             set
             {
+                if (ReferenceEquals(_model, value))
+                {
+                    return;
+                }
                 _model = value;
                 UpdateModel();
                 ModelUpdatedSignal.Dispatch();
