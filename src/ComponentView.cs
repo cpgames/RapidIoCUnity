@@ -17,7 +17,7 @@ namespace cpGames.core.RapidMVC
 
         public void RegisterWithContext()
         {
-            _contextName = GetComponentInParent<SceneView>().ContextName;
+            _contextName = transform.FindFirstParent<SceneView>().ContextName;
             Rapid.RegisterView(this);
         }
 
