@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace cpGames.core.RapidMVC
 {
+    /// <summary>
+    /// Base class for all views deriving from MonoBehavior.
+    /// </summary>
     public class ComponentView : MonoBehaviour, IView
     {
         #region Fields

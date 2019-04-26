@@ -1,5 +1,9 @@
 ﻿namespace cpGames.core.RapidMVC
 {
+    /// <summary>
+    /// View with a model for convenience.
+    /// </summary>
+    /// <typeparam name="TModel"></typeparam>
     public abstract class ComponentModelView<TModel> : ComponentView
     {
         #region Fields
@@ -27,6 +31,9 @@
         #endregion
 
         #region Methods
+        /// <summary>
+        /// Implement your logic here when model is updated.
+        /// </summary>
         protected virtual void UpdateModel() { }
         #endregion
     }
