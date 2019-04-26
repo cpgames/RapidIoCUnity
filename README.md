@@ -1,2 +1,2 @@
-# RapidMVCUnity
-Unity integration for RapidMVC.
+# RapidMVCUnityExamples
+Examples for RapidMVCUnity integration.

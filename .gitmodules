@@ -1,0 +1,3 @@
+[submodule "Assets/cpGames/core/RapidMVCUnity"]
+	path = Assets/cpGames/core/RapidMVCUnity
+	url = https://github.com/cpgames/RapidMVCUnity.git
