@@ -1,6 +1,6 @@
-# RapidMVC for Unity
-RapidMVCUnity is an extension of RapidMVC for Unity3D. 
+# RapidIoC for Unity
+RapidIoUnity is an extension of RapidIoC for Unity3D. 
 
-[RapidMVC Documentation](https://github.com/cpgames/RapidMVC/wiki).  
-[Getting Started Tutorial](https://github.com/cpgames/RapidMVCUnity/wiki/Getting-Started-Tutorial).  
+[RapidIoC Documentation](https://github.com/cpgames/RapidIoC/wiki).  
+[Getting Started Tutorial](https://github.com/cpgames/RapidIoCUnity/wiki/Getting-Started-Tutorial).  
 
