@@ -60,7 +60,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\RapidMVCUnityExamples\SpaceShipExample\resources\tutorialInfo\Scripts\Editor\ReadmeEditor.cs" />
+    <Compile Include="Assets\RapidIoCUnityExamples\SpaceShipExample\resources\tutorialInfo\Scripts\Editor\ReadmeEditor.cs" />
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>C:/Users/Misha/Documents/GameProjects/cpgames/core/RapidMVCUnity/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
