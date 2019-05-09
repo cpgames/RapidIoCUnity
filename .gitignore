@@ -10,6 +10,7 @@
 *.vs
 *.backup
 *.tss
+*.tmp
 
 # Ignore folders
 bin/
