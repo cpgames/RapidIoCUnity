@@ -7,15 +7,18 @@ namespace cpGames.core.RapidIoC
     /// <summary>
     /// Base class for all views deriving from MonoBehavior.
     /// </summary>
-    public class ComponentView : MonoBehaviour, IView
+    public class ComponentView : MonoBehaviour, IComponent
     {
         #region Fields
         private string _contextName;
         #endregion
 
-        #region IView Members
+        #region IComponent Members
+        public Signal DestroyedSignal { get; } = new Signal();
         public virtual string ContextName => _contextName;
         public List<ISignalMapping> SignalMappings { get; } = new List<ISignalMapping>();
+        public bool IsReady { get; private set; }
+        public Signal ReadySignal { get; } = new Signal();
 
         public void RegisterWithContext()
         {
@@ -33,10 +36,13 @@ namespace cpGames.core.RapidIoC
         protected virtual void Awake()
         {
             RegisterWithContext();
+            IsReady = true;
+            ReadySignal.Dispatch();
         }
 
         protected virtual void OnDestroy()
         {
+            DestroyedSignal.Dispatch();
             UnregisterFromContext();
         }
         #endregion

@@ -11,6 +11,7 @@
 *.backup
 *.tss
 *.tmp
+*.bak.meta
 
 # Ignore folders
 bin/
