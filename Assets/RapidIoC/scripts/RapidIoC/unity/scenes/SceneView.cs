@@ -12,11 +12,13 @@ namespace cpGames.core.RapidIoC
         #endregion
 
         #region Properties
-        public override string ContextName => CpUnityExtensions.GetSceneName(GetType());
+        public override string ContextName => SceneName;
         [Inject] public LoadSceneSignal LoadSceneSignal { get; set; }
         [Inject] public UnloadSceneSignal UnloadSceneSignal { get; set; }
         [Inject] public SceneLoadedSignal SceneLoadedSignal { get; set; }
         [Inject] public SceneUnloadedSignal SceneUnloadedSignal { get; set; }
+
+        public abstract string SceneName { get; }
         #endregion
 
         #region Listeners
@@ -26,7 +28,7 @@ namespace cpGames.core.RapidIoC
             {
                 return;
             }
-            if (_syncingAttribute.SceneType == sceneView.GetType() &&
+            if (_syncingAttribute.SceneName == sceneView.SceneName &&
                 (_syncingAttribute.Relationship & SceneRelationshipType.Include) != 0)
             {
                 SyncNext();
@@ -60,17 +62,13 @@ namespace cpGames.core.RapidIoC
             _syncingAttribute = _scenesToSync.Dequeue();
             if ((_syncingAttribute.Relationship & SceneRelationshipType.Exclude) != 0)
             {
-                UnloadSceneSignal.Dispatch(_syncingAttribute.SceneType);
-                SyncNext();
+                UnloadSceneSignal.Dispatch(_syncingAttribute.SceneName);
             }
             else if ((_syncingAttribute.Relationship & SceneRelationshipType.Include) != 0)
             {
-                LoadSceneSignal.Dispatch(_syncingAttribute.SceneType);
+                LoadSceneSignal.Dispatch(_syncingAttribute.SceneName);
             }
-            else
-            {
-                SyncNext();
-            }
+            SyncNext();
         }
 
         protected virtual void DispatchSceneLoadedSignal()
@@ -85,12 +83,12 @@ namespace cpGames.core.RapidIoC
             {
                 if ((att.Relationship & SceneRelationshipType.Depend) != 0)
                 {
-                    UnloadSceneSignal.Dispatch(att.SceneType);
+                    UnloadSceneSignal.Dispatch(att.SceneName);
                 }
             }
             UnmapBindings();
             Resources.UnloadUnusedAssets();
-            SceneUnloadedSignal.Dispatch(GetType());
+            SceneUnloadedSignal.Dispatch(SceneName);
             base.OnDestroy();
         }
 

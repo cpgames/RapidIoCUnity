@@ -1,20 +1,19 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace cpGames.core.RapidIoC
 {
-    public class UnloadSceneCommand : Command<Type>
+    public class UnloadSceneCommand : Command<string>
     {
         #region Methods
-        public override void Execute(Type sceneType)
+        public override void Execute(string sceneName)
         {
-            CpUnityExtensions.UnloadLevelAdditive(sceneType, operation =>
+            CpUnityExtensions.UnloadLevelAdditive(sceneName, operation =>
             {
-                var contextName = CpUnityExtensions.GetSceneName(sceneType);
-                if (Rapid.Contexts.FindContext(contextName, out var context, out _))
+                if (Rapid.Contexts.FindContext(sceneName, out var context, out _))
                 {
-                    Debug.LogWarning(string.Format("Scene <{0}> is being destroyed while its context still exists with <{1}> bindings and <{2}> views.",
-                        contextName, context.BindingCount, context.ViewCount));
+                    Debug.LogWarning(
+                        $"Scene <{sceneName}> is being destroyed while its context still exists with " +
+                        $"<{context.BindingCount}> bindings and <{context.ViewCount}> views.");
                 }
             });
         }

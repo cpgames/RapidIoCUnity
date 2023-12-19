@@ -9,18 +9,16 @@
         #region Methods
         protected override void MapBindings()
         {
-            Rapid.Bind<LoadSceneSignal>();
-            Rapid.Bind<UnloadSceneSignal>();
+            Rapid.Bind<LoadSceneSignal>()
+                .AddCommand(new LoadSceneCommand(), this);
+            Rapid.Bind<UnloadSceneSignal>()
+                .AddCommand(new UnloadSceneCommand(), this);
             Rapid.Bind<SceneLoadedSignal>();
             Rapid.Bind<SceneUnloadedSignal>();
-            LoadSceneSignal.AddCommand<LoadSceneCommand>();
-            UnloadSceneSignal.AddCommand<UnloadSceneCommand>();
         }
 
         protected override void UnmapBindings()
         {
-            LoadSceneSignal.RemoveCommand<LoadSceneCommand>();
-            UnloadSceneSignal.RemoveCommand<UnloadSceneCommand>();
             Rapid.Unbind<LoadSceneSignal>();
             Rapid.Unbind<UnloadSceneSignal>();
             Rapid.Unbind<SceneLoadedSignal>();

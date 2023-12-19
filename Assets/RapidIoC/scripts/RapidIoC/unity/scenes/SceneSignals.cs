@@ -2,19 +2,24 @@
 
 namespace cpGames.core.RapidIoC
 {
-    public class LoadSceneSignal : Signal<Type>
+    public class LoadSceneSignal : Signal<string>
     {
         #region Methods
         public void Dispatch<TScene>() where TScene : SceneView
         {
-            Dispatch(typeof(TScene));
+            Dispatch(CpUnityExtensions.GetSceneName<TScene>());
+        }
+
+        public void Dispatch(Type sceneType)
+        {
+            Dispatch(CpUnityExtensions.GetSceneName(sceneType));
         }
         #endregion
     }
 
     public class SceneLoadedSignal : Signal<SceneView> { }
 
-    public class UnloadSceneSignal : Signal<Type> { }
+    public class UnloadSceneSignal : Signal<string> { }
 
-    public class SceneUnloadedSignal : Signal<Type> { }
+    public class SceneUnloadedSignal : Signal<string> { }
 }

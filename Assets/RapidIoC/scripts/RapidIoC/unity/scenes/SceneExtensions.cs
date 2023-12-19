@@ -59,11 +59,13 @@ namespace cpGames.core.RapidIoC
         public static void BindToAddObjectToScene<TInterface, TImplementation>(
             this SceneView scene,
             string bindingName,
-            bool rootContext)
+            bool rootContext,
+            Transform parent = null)
             where TImplementation : Component, TInterface
         {
             var contextName = rootContext ? null : scene.ContextName;
-            var obj = scene.transform.AddChild<TImplementation>();
+            if (parent == null) parent = scene.transform;
+            var obj = parent.AddChild<TImplementation>();
             if (!string.IsNullOrEmpty(bindingName))
             {
                 obj.name = bindingName;
@@ -77,27 +79,30 @@ namespace cpGames.core.RapidIoC
 
         public static void BindToAddObjectToScene<TInterface, TImplementation>(
             this SceneView scene,
-            bool rootContext = false)
+            bool rootContext = false,
+            Transform parent = null)
             where TImplementation : Component, TInterface
         {
-            scene.BindToAddObjectToScene<TInterface, TImplementation>(null, rootContext);
+            scene.BindToAddObjectToScene<TInterface, TImplementation>(null, rootContext, parent);
         }
 
         public static void BindToAddObjectToScene<TImplementation>(
             this SceneView scene,
             string bindingName,
-            bool rootContext)
+            bool rootContext,
+            Transform parent = null)
             where TImplementation : Component
         {
-            scene.BindToAddObjectToScene<TImplementation, TImplementation>(bindingName, rootContext);
+            scene.BindToAddObjectToScene<TImplementation, TImplementation>(bindingName, rootContext, parent);
         }
 
         public static void BindToAddObjectToScene<TImplementation>(
             this SceneView scene,
-            bool rootContext = false)
+            bool rootContext = false,
+            Transform parent = null)
             where TImplementation : Component
         {
-            scene.BindToAddObjectToScene<TImplementation, TImplementation>(null, rootContext);
+            scene.BindToAddObjectToScene<TImplementation, TImplementation>(null, rootContext, parent);
         }
         #endregion
     }

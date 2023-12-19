@@ -1,13 +1,11 @@
-﻿using System;
-
-namespace cpGames.core.RapidIoC
+﻿namespace cpGames.core.RapidIoC
 {
-    public class LoadSceneCommand : Command<Type>
+    public class LoadSceneCommand : Command<string>
     {
         #region Methods
-        public override void Execute(Type sceneType)
+        public override void Execute(string sceneName)
         {
-            CpUnityExtensions.LoadLevelAdditive(sceneType);
+            CpUnityExtensions.LoadLevelAdditive(sceneName);
         }
         #endregion
     }

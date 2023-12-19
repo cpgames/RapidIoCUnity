@@ -140,7 +140,11 @@ namespace cpGames.core
 
         public static bool UnloadLevelAdditive(Type sceneType, Action<AsyncOperation> callback = null)
         {
-            var sceneName = GetSceneName(sceneType);
+            return UnloadLevelAdditive(GetSceneName(sceneType));
+        }
+
+        public static bool UnloadLevelAdditive(string sceneName, Action<AsyncOperation> callback = null)
+        {
             if (SceneManager.GetSceneByName(sceneName).isLoaded)
             {
                 var op = SceneManager.UnloadSceneAsync(sceneName);
@@ -216,13 +220,17 @@ namespace cpGames.core
             Quaternion rotation,
             Vector3 scale)
         {
-            var go = Object.Instantiate(prefab);
+            GameObject go;
 
-            if (go != null && parent != null)
+            if (parent == null)
             {
-                var t = go.transform;
-                t.SetParent(parent.transform);
+                go = Object.Instantiate(prefab);
+            }
+            else
+            {
+                go = Object.Instantiate(prefab, parent.transform);
 
+                var t = go.transform;
                 t.localPosition = position;
                 t.localRotation = rotation;
                 t.localScale = scale;
@@ -268,8 +276,7 @@ namespace cpGames.core
 
         public static GameObject AddChild(this Transform parent, GameObject prefab)
         {
-            return AddChild(parent.gameObject, prefab, Vector3.zero, Quaternion.identity,
-                Vector3.one);
+            return AddChild(parent.gameObject, prefab, Vector3.zero, Quaternion.identity, Vector3.one);
         }
 
         public static IEnumerable<T> FindAllChildren<T>(this Transform current)
